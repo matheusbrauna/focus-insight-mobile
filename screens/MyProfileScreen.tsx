@@ -47,9 +47,9 @@ function MyProfileScreen({ navigation }: RootStackScreenProps<"MyProfile">) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hello {user?.firstName}</Text>
+      <Text style={styles.title}>Olá {user?.firstName}</Text>
       <TouchableOpacity onPress={onSignOutPress} style={styles.link}>
-        <Text style={styles.linkText}>Sign out</Text>
+        <Text style={styles.linkText}>Sair</Text>
       </TouchableOpacity>
       <Text style={styles.token}>{sessionToken}</Text>
     </View>

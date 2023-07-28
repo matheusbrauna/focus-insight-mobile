@@ -1,18 +1,20 @@
-import React from "react";
+import { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useSignIn } from "@clerk/clerk-expo";
 import { log } from "../logger";
 import { RootStackScreenProps } from "../types";
 import { OAuthButtons } from "../components/OAuth";
 import { styles } from "../components/Styles";
+import facebookLogo from "../assets/images/facebook.svg"
+import googleLogo from "../assets/images/google.svg"
 
 export default function SignInScreen({
   navigation,
 }: RootStackScreenProps<"SignIn">) {
   const { signIn, setSession, isLoaded } = useSignIn();
 
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSignInPress = async () => {
     if (!isLoaded) {
@@ -37,15 +39,18 @@ export default function SignInScreen({
   return (
     <View style={styles.container}>
       <View style={styles.oauthView}>
-        <OAuthButtons />
+        <OAuthButtons iconSource={googleLogo} strategy="oauth_google" />
+        <OAuthButtons iconSource={facebookLogo} strategy="oauth_facebook" />
       </View>
+
+      <Text style={{ marginBottom: 20 }}>Ou</Text>
 
       <View style={styles.inputView}>
         <TextInput
           autoCapitalize="none"
           value={emailAddress}
           style={styles.textInput}
-          placeholder="Email..."
+          placeholder="E-mail"
           placeholderTextColor="#000"
           onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
         />
@@ -55,7 +60,7 @@ export default function SignInScreen({
         <TextInput
           value={password}
           style={styles.textInput}
-          placeholder="Password..."
+          placeholder="Senha"
           placeholderTextColor="#000"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
@@ -63,17 +68,17 @@ export default function SignInScreen({
       </View>
 
       <TouchableOpacity style={styles.primaryButton} onPress={onSignInPress}>
-        <Text style={styles.primaryButtonText}>Sign in</Text>
+        <Text style={styles.primaryButtonText}>Entrar</Text>
       </TouchableOpacity>
 
       <View style={styles.footer}>
-        <Text>Have an account?</Text>
+        <Text>Não possui uma conta ainda?</Text>
 
         <TouchableOpacity
           style={styles.secondaryButton}
           onPress={onSignUpPress}
         >
-          <Text style={styles.secondaryButtonText}>Sign up</Text>
+          <Text style={styles.secondaryButtonText}>Crie agora</Text>
         </TouchableOpacity>
       </View>
     </View>

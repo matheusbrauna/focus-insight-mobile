@@ -4,15 +4,22 @@ import { Text, TouchableOpacity } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { styles } from "./Styles";
 import { useWamUpBrowser } from "../hooks/useWarmUpBrowser";
+import { Image } from "expo-image";
+import type { OAuthStrategy } from '@clerk/types';
 
 WebBrowser.maybeCompleteAuthSession();
 
-export function OAuthButtons() {
+interface OAuthButtonsProps {
+  iconSource: string
+  strategy: OAuthStrategy
+}
+
+export function OAuthButtons({ iconSource, strategy }:OAuthButtonsProps) {
   // Warm up the android browser to improve UX
   // https://docs.expo.dev/guides/authentication/#improving-user-experience
   useWamUpBrowser();
 
-  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+  const { startOAuthFlow } = useOAuth({ strategy });
 
   const onPress = React.useCallback(async () => {
     try {
@@ -31,10 +38,10 @@ export function OAuthButtons() {
 
   return (
     <TouchableOpacity
-      style={{ ...styles.secondaryButton, marginBottom: 20 }}
+      style={{ ...styles.oauthButton, marginBottom: 20 }}
       onPress={onPress}
     >
-      <Text style={styles.secondaryButtonText}>Continue with Google</Text>
+      <Image source={iconSource} style={{ width:24, height: 24, objectFit: "cover" }} />
     </TouchableOpacity>
   );
 }

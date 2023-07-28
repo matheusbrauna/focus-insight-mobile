@@ -40,24 +40,24 @@ const RootNavigator = () => {
           <Stack.Screen
             name="MyProfile"
             component={MyProfileScreen}
-            options={{ title: "MyProfile" }}
+            options={{ title: "Home", headerShown: false }}
           />
         ) : (
           <>
             <Stack.Screen
-              name="SignUp"
-              component={SignUpScreen}
-              options={{ title: "Sign Up" }}
-            />
-            <Stack.Screen
               name="SignIn"
               component={SignInScreen}
-              options={{ title: "Sign In" }}
+              options={{ title: "Login" }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUpScreen}
+              options={{ title: "Cria sua conta" }}
             />
             <Stack.Screen
               name="VerifyCode"
               component={VerifyCodeScreen}
-              options={{ title: "Sign Up" }}
+              options={{ title: "Código de confirmação" }}
             />
           </>
         )}

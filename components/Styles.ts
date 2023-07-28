@@ -32,7 +32,6 @@ export const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
     backgroundColor: "#000",
     color: "#ffffff",
   },
@@ -76,8 +75,18 @@ export const styles = StyleSheet.create({
 
   oauthView: {
     width: "90%",
-    borderBottomWidth: 1,
-    borderBottomColor: "#000",
-    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent:  "center",
+    gap: 20
   },
+
+  oauthButton: {
+    width: 48,
+    height: 48,
+    borderWidth: 1,
+    borderColor: "#e2e8f0",
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });

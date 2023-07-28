@@ -5,6 +5,8 @@ import { log } from "../logger";
 import { RootStackScreenProps } from "../types";
 import { styles } from "../components/Styles";
 import { OAuthButtons } from "../components/OAuth";
+import facebookLogo from "../assets/images/facebook.svg"
+import googleLogo from "../assets/images/google.svg"
 
 export default function SignUpScreen({
   navigation,
@@ -43,14 +45,17 @@ export default function SignUpScreen({
   return (
     <View style={styles.container}>
       <View style={styles.oauthView}>
-        <OAuthButtons />
+        <OAuthButtons iconSource={googleLogo} strategy="oauth_google" />
+        <OAuthButtons iconSource={facebookLogo} strategy="oauth_facebook" />
       </View>
+
+      <Text style={{ marginBottom: 20 }}>Ou</Text>
 
       <View style={styles.inputView}>
         <TextInput
           value={firstName}
           style={styles.textInput}
-          placeholder="First name..."
+          placeholder="Nome"
           placeholderTextColor="#000"
           onChangeText={(firstName) => setFirstName(firstName)}
         />
@@ -60,7 +65,7 @@ export default function SignUpScreen({
         <TextInput
           value={lastName}
           style={styles.textInput}
-          placeholder="Last name..."
+          placeholder="Sobrenome"
           placeholderTextColor="#000"
           onChangeText={(lastName) => setLastName(lastName)}
         />
@@ -71,7 +76,7 @@ export default function SignUpScreen({
           autoCapitalize="none"
           value={emailAddress}
           style={styles.textInput}
-          placeholder="Email..."
+          placeholder="E-mail"
           placeholderTextColor="#000"
           onChangeText={(email) => setEmailAddress(email)}
         />
@@ -81,7 +86,7 @@ export default function SignUpScreen({
         <TextInput
           value={password}
           style={styles.textInput}
-          placeholder="Password..."
+          placeholder="Senha"
           placeholderTextColor="#000"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
@@ -89,17 +94,17 @@ export default function SignUpScreen({
       </View>
 
       <TouchableOpacity style={styles.primaryButton} onPress={onSignUpPress}>
-        <Text style={styles.primaryButtonText}>Sign up</Text>
+        <Text style={styles.primaryButtonText}>Criar conta</Text>
       </TouchableOpacity>
 
       <View style={styles.footer}>
-        <Text>Have an account?</Text>
+        <Text>Já tem uma conta?</Text>
 
         <TouchableOpacity
           style={styles.secondaryButton}
           onPress={onSignInPress}
         >
-          <Text style={styles.secondaryButtonText}>Sign in</Text>
+          <Text style={styles.secondaryButtonText}>Faça o login aqui</Text>
         </TouchableOpacity>
       </View>
     </View>

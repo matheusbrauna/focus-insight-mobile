@@ -41,7 +41,7 @@ export default function SignUpScreen({
         />
       </View>
       <TouchableOpacity style={styles.primaryButton} onPress={onPress}>
-        <Text style={styles.primaryButtonText}>Verify Email</Text>
+        <Text style={styles.primaryButtonText}>Verifique o seu E-mail</Text>
       </TouchableOpacity>
     </View>
   );
