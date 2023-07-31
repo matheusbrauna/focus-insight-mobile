@@ -1,8 +1,7 @@
-import * as React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
-import { log } from "../logger";
+import { StyleSheet, Text, View } from "react-native";
+import { SignedIn, SignedOut } from "@clerk/clerk-expo";
 import { RootStackScreenProps } from "../types";
+import Card from "../components/card";
 
 export default function SafeMyProfileScreen(
   props: RootStackScreenProps<"MyProfile">
@@ -22,36 +21,9 @@ export default function SafeMyProfileScreen(
 }
 
 function MyProfileScreen({ navigation }: RootStackScreenProps<"MyProfile">) {
-  const { getToken, signOut } = useAuth();
-  const { user } = useUser();
-
-  const [sessionToken, setSessionToken] = React.useState("");
-
-  const onSignOutPress = async () => {
-    try {
-      await signOut();
-    } catch (err: any) {
-      log("Error:> " + err?.status || "");
-      log("Error:> " + err?.errors ? JSON.stringify(err.errors) : err);
-    }
-  };
-
-  React.useEffect(() => {
-    const scheduler = setInterval(async () => {
-      const token = await getToken();
-      setSessionToken(token as string);
-    }, 1000);
-
-    return () => clearInterval(scheduler);
-  }, []);
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Olá {user?.firstName}</Text>
-      <TouchableOpacity onPress={onSignOutPress} style={styles.link}>
-        <Text style={styles.linkText}>Sair</Text>
-      </TouchableOpacity>
-      <Text style={styles.token}>{sessionToken}</Text>
+      <Card />
     </View>
   );
 }
@@ -59,25 +31,5 @@ function MyProfileScreen({ navigation }: RootStackScreenProps<"MyProfile">) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
-  linkText: {
-    fontSize: 14,
-    color: "#2e78b7",
-  },
-  token: {
-    marginTop: 15,
-    paddingVertical: 15,
-    fontSize: 15,
   },
 });
